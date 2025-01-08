@@ -1,0 +1,287 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% tailwind_css %}
+    <title>{% block title %}mera news{% endblock %}</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v21.0"></script>
+    {% load static %}
+  </head>
+  <body>
+    
+      <nav class="bg-yellow-50 z-50 shadow-lg sticky top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex items-center">
+              <img src="{%static '/images/logo.png'%}" alt="Logo">
+            </div>
+    
+            <!-- Menu for larger screens -->
+            <div class="hidden lg:flex space-x-8">
+              <a href="{% url "index" %}" class="text-gray-700 hover:text-orange-500 font-medium">Home</a>
+    
+              <!-- Dropdown -->
+              <div class="relative group">
+                <button
+                  class="text-gray-700 flex hover:text-orange-500 font-medium focus:outline-none"
+                >
+                  Category
+                  <div><i class="pt-1 text-[20px] bx bxs-chevron-down"></i></div>
+                </button>
+                <div
+                  class="absolute hidden group-hover:flex flex-col bg-white shadow-lg rounded py-2"
+                >
+                  <a href="{% url 'category_filter' 'tech' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Tech</a>
+                  <a href="{% url 'category_filter' 'lifestyle' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Lifestyle</a>
+                  <a href="{% url 'category_filter' 'health' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Health</a>
+                  <a href="{% url 'category_filter' 'education' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Education</a>
+                  <a href="{% url 'category_filter' 'travel' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Travel</a>
+                </div>
+              </div>
+    
+              <a href="{% url 'about' %}" class="text-gray-700 hover:text-orange-500 font-medium">About Us</a>
+              <a href="{% url 'contact' %}" class="text-gray-700 hover:text-orange-500 font-medium">Contact Us</a>
+            </div>
+    
+            <!-- Search Bar -->
+            <div class="hidden md:flex items-center space-x-4">
+              <form method='get' action='/search-result'>
+              <input
+                type="text"
+                placeholder="Search..."
+                name='query'
+                id='query'
+                class="w-48 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+              />
+              <button
+                type='submit' class="bg-orange-500 text-white px-4 py-2 rounded-r-md hover:bg-orange-600"
+              >
+                Search
+              </button>
+              </form>
+            </div>
+    
+            <!-- Login and Sign Up Buttons -->
+            <div class="hidden md:flex items-center space-x-2">
+              {% if user.is_authenticated %}
+                  <!-- Show Logout Button if the user is logged in -->
+                  <a href="{% url 'logout' %}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                      Logout
+                  </a>
+                  <a href="{% url "blog_create" %}"><div class='h-10 text-2xl w-10 ml-4 rounded-full grid text-center text-white bg-gray-700'>{{user.username|slice:1}}</div></a>
+              {% else %}
+                  <!-- Show Login and Sign-Up Buttons if the user is not logged in -->
+                  <a href="{% url 'login' %}" class="text-gray-700 hover:text-orange-500">Login</a>
+                  <a href="{% url 'register' %}" class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600">
+                      Sign Up
+                  </a>
+              {% endif %}
+          </div>
+    
+            <!-- Hamburger Icon -->
+            <div class="flex lg:hidden">
+              <button
+                id="menu-toggle"
+                class="text-gray-700 text-2xl focus:outline-none"
+              >
+                <i class="bx bx-menu"></i>
+              </button>
+            </div>
+          </div>
+    
+          <!-- Mobile Menu -->
+          <div id="mobile-menu" class="hidden lg:hidden bg-yellow-50">
+            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Home</a>
+            <div class="relative">
+              <button
+                class="w-full text-left px-4 py-2 text-gray-700 hover:bg-orange-100 focus:outline-none flex justify-between"
+                id="dropdown-toggle"
+              >
+                Category <i class="bx bxs-chevron-down"></i>
+              </button>
+              <div
+                id="dropdown-menu"
+                class="hidden flex-col bg-white shadow-lg rounded py-2"
+              >
+              <a href="{% url 'category_filter' 'tech' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Tech</a>
+              <a href="{% url 'category_filter' 'lifestyle' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Lifestyle</a>
+              <a href="{% url 'category_filter' 'health' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Health</a>
+              <a href="{% url 'category_filter' 'education' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Education</a>
+              <a href="{% url 'category_filter' 'travel' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Travel</a>
+              </div>
+            </div>
+            <a href="{% url "about" %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">About Us</a>
+            <a href="{% url 'contact' %}" class="block px-4 py-2 text-gray-700 hover:bg-orange-100">Contact Us</a>
+            <div class="px-4 py-2">
+              <div class="flex md:hidden items-center space-x-4">
+                <form action="/search-result" method='get'>
+                <input
+                  type="text"
+                  name='query'
+                  id='query'
+                  placeholder="Search..."
+                  class="w-[70%] px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                />
+                <button
+                type='submit'
+                  class="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600"
+                >
+                  Search
+                </button>
+              </form>
+              </div>
+              <div class="mt-4 md:hidden flex space-x-2">
+                {% if user.is_authenticated %}
+                <a
+                href="{% url 'logout' %}"
+                class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+              >
+                Logout
+              </a>
+                {% else %}
+                <a href="{% url "login" %}" class="text-gray-700 hover:text-orange-500">Login</a>
+                <a
+                  href="{% url 'register' %}"
+                  class="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600"
+                >
+                  Sign Up
+                </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      {% if messages %}
+      <div id="messages" class="messages absolute z-50 w-full">
+        {% for message in messages %}
+          <div class="
+            {% if message.tags == 'success' %}
+              bg-green-500 text-white p-3 text-center mb-4
+            {% elif message.tags == 'error' %}
+              bg-red-500 text-white p-3 text-center mb-4
+            {% endif %}
+          ">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+   
+    
+
+        
+  
+     
+    
+
+
+    {% block content %}
+    {% endblock  %}
+ 
+
+
+    <footer>
+        <div class="bg-black py-4 text-gray-400">
+            <div class="container px-4 mx-auto">
+                <div class="-mx-4 flex flex-wrap justify-between">
+                    <div class="px-4 my-4 w-full xl:w-1/5">
+                        <a href="/" class="block text-orange-500 font-serif text-4xl font-bold w-56 mb-10">
+                         Mera News
+                        </a>
+                        <p class="text-justify">
+                          This blog website focuses on education and spreading knowledge through well-researched articles and resources. It aims to empower readers, promote learning, and inspire growth by sharing insights on diverse topics, fostering curiosity
+                        </p>
+                    </div>
+    
+                    <div class="px-4 my-4 w-full sm:w-auto">
+                        <div>
+                            <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-orange-500">Pages</h2>
+                        </div>
+                        <ul class="leading-8">
+                            <li><a href="{% url "about" %}" class="hover:text-orange-500">About Us</a></li>
+                            <li><a href="#" class="hover:text-orange-500">Terms &amp; Conditions</a></li>
+                            <li><a href="#" class="hover:text-orange-500">Privacy Policy</a></li>
+                            <li><a href="{% url "contact" %}" class="hover:text-orange-500">Contact Us</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="px-4 my-4 w-full sm:w-auto">
+                        <div>
+                            <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-orange-500">Blog</h2>
+                        </div>
+                        <ul class="leading-8">
+                            <li>A platform to share your stories and experiences.</li>
+                            <li>From travel adventures to personal insights.</li>
+                            <li>How to Inspire others with your unique voice ?</li>
+                            <li>Let the world read your story today !</li>
+                            <li>Have a good day.</li>
+                        </ul>
+                    </div>
+    
+                    <div class="px-4 my-4 w-full sm:w-auto xl:w-1/5">
+                        <div>
+                            <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-orange-500">Connect With Us</h2>
+                        </div>
+                        <a href="https://www.facebook.com/profile.php?id=61568604955610" target="_blank" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-orange-500 hover:border-orange-500">
+                            <i class="bx bxl-facebook-circle text-2xl text-orange-500"></i>
+                        </a>
+                        <a href="https://x.com/i/flow/login?redirect_after_login=%2FMrSadre4581" target="_blank" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-orange-500 hover:border-orange-500">
+                            <i class="bx bxl-twitter text-2xl text-orange-500"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sadre-alam-8255a7301/" target="_blank" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-orange-500 hover:border-orange-500">
+                            <i class="bx bxl-linkedin text-2xl text-orange-500"></i>
+                        </a>
+                        <a href="https://github.com/sadre0786" target="_blank" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-orange-500 hover:border-orange-500">
+                            <i class="bx bxl-github text-2xl text-orange-500"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="bg-orange-500 py-4 text-gray-100">
+            <div class="container mx-auto px-4">
+                <div class="-mx-4 flex flex-wrap justify-between">
+                    <div class="px-4 w-full text-center sm:w-auto sm:text-left">
+                        Copyright ©
+                        <script>new Date().getFullYear() > 2020 && document.write(new Date().getFullYear())</script>
+                        Mera News . All Rights Reserved.
+                    </div>
+                    <div class="px-4 w-full text-center sm:w-auto sm:text-left">
+                        Created by ❤ Mr.Sadre .
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+ 
+
+
+
+
+    <script>
+      window.onload = function() {
+        setTimeout(function() {
+          const messagesDiv = document.getElementById('messages');
+          if (messagesDiv) {
+            messagesDiv.style.transition = "opacity 0.5s ease-out";
+            messagesDiv.style.opacity = 0;
+            setTimeout(() => messagesDiv.remove(), 500); // Fully remove from the DOM after fading out
+          }
+        }, 2000); // 5000ms = 5 seconds
+      };
+
+    </script>
+    
+   
+<script src="{% static "javascripts/layout.js" %}"></script>
+  </body>
+</html>

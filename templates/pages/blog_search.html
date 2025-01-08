@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Result{% endblock  %}
+
+
+
+
+{% block content %}
+
+{% if search_blogs %}
+<h1 class='text-4xl font-bold ml-9 mt-10 text-orange-500'>Search Result :</h1>
+<div class="grid my-10 justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {% for blog in search_blogs %}
+    <a rel="noopener noreferrer" href="#" class="max-w-sm mx-auto rounded-lg border-2 border-orange-500 group hover:no-underline focus:no-underline dark:bg-gray-50 block">
+        <!-- Blog Image -->
+        <img role="presentation" class="object-cover rounded-lg p-2 w-full h-44 dark:bg-gray-500" src="{{blog.main_image.url}}">
+        
+        <!-- Blog Content -->
+        <div class="p-6 space-y-2">
+            <h2 class="text-2xl font-semibold group-hover:underline group-focus:underline">{{blog.title}}</h2>
+            <span class="text-xs dark:text-gray-600">{{blog.created_at}}</span>
+            <p>{{blog.content|truncatewords:30}}</p>
+        </div>
+
+        <!-- Icon Section -->
+        <div class="flex items-center justify-between p-4 border-t border-gray-300">
+            <!-- Like -->
+            <button class="flex items-center space-x-1 text-gray-600 hover:text-orange-500">
+                <i class='bx bx-like text-lg'></i>
+                <span>Like</span>
+            </button>
+            
+            <!-- Comments -->
+            <button class="flex items-center space-x-1 text-gray-600 hover:text-orange-500">
+                <i class='bx bx-comment text-lg'></i>
+                <span>Comment</span>
+            </button>
+            
+            <!-- Share -->
+            <button class="flex items-center space-x-1 text-gray-600 hover:text-orange-500">
+                <i class='bx bx-share text-lg'></i>
+                <span>Share</span>
+            </button>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% else %}
+<div class='sm:p-20 p-8 sm:text-xl text-lg'>
+<p class='text-red-600'>Your search - <br><strong> {{query}} </strong><br>
+    not match any documents.</p>
+
+    <p>Suggestions:</p>
+    <ul class='list-disc ml-5'>
+        <li>Make sure that all words are spelled correctly.</li>
+        <li>Try different keywords.</li>
+        <li>Try more general keywords.</li>
+        <li>Try fewer keywords.</li>
+    </ul>
+</div>
+{% endif %}
+
+
+{% endblock  %}
+
+

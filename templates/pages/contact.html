@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+
+{% block title %}Contact Us{% endblock  %}
+
+
+
+
+{% block content %}
+
+<div class="container my-12 mx-auto px-2 md:px-4">
+
+    <section class="bg-gray-100">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
+            <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900">Visit Our Location</h2>
+                <p class="mt-4 text-lg text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="mt-16 lg:mt-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="rounded-lg overflow-hidden">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672.945750644447!2d-122.42107853750231!3d37.7730507907087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858070cc2fbd55%3A0xa71491d736f62d5c!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1619524992238!5m2!1sen!2sus"
+                            width="100%" height="480" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div>
+                        <div class="max-w-full mx-auto rounded-lg overflow-hidden">
+                            <div class="px-6 py-4">
+                                <h3 class="text-lg font-medium text-gray-900">Our Address</h3>
+                                <p class="mt-1 text-gray-600">123 Main St, San Francisco, CA 94105</p>
+                            </div>
+                            <div class="border-t border-gray-200 px-6 py-4">
+                                <h3 class="text-lg font-medium text-gray-900">Hours</h3>
+                                <p class="mt-1 text-gray-600">Monday - Friday: 9am - 5pm</p>
+                                <p class="mt-1 text-gray-600">Saturday: 10am - 4pm</p>
+                                <p class="mt-1 text-gray-600">Sunday: Closed</p>
+                            </div>
+                            <div class="border-t border-gray-200 px-6 py-4">
+                                <h3 class="text-lg font-medium text-gray-900">Contact</h3>
+                                <p class="mt-1 text-gray-600">Email: info@example.com</p>
+                                <p class="mt-1 text-gray-600">Phone: +1 23494 34993</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="my-32">
+
+        <div class="flex justify-center">
+            <div class="text-center md:max-w-xl lg:max-w-3xl">
+                <h2 class="mb-12 px-6 text-3xl font-bold">
+                    Contact us
+                </h2>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap">
+
+            <form class="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
+
+                <div class="mb-3 w-full">
+                    <label class="block font-medium mb-[2px] text-teal-700" htmlFor="exampleInput90">
+                        Name
+                    </label>
+                    <input type="text" class="px-2 py-2 border w-full outline-none rounded-md" id="exampleInput90" placeholder="Name" />
+                </div>
+
+                <div class="mb-3 w-full">
+                    <label class="block font-medium mb-[2px] text-teal-700" htmlFor="exampleInput90">
+                        Email
+                    </label>
+                    <input type="email" class="px-2 py-2 border w-full outline-none rounded-md" id="exampleInput90"
+                        placeholder="Enter your email address" />
+                </div>
+
+                <div class="mb-3 w-full">
+                    <label class="block font-medium mb-[2px] text-teal-700" htmlFor="exampleInput90">
+                        Message
+                    </label>
+                    <textarea class="px-2 py-2 border rounded-[5px] w-full outline-none" name="" id=""></textarea>
+                </div>
+
+                <button type="button"
+                    class="mb-6 inline-block w-full rounded bg-teal-400 px-6 py-2.5 font-medium uppercase leading-normal text-white hover:shadow-md hover:bg-teal-500">
+                    Send
+                </button>
+
+            </form>
+
+            <div class="w-full shrink-0 grow-0 mt-10 basis-auto lg:w-7/12">
+                <div class="flex flex-wrap">
+                    <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
+                        <div class="flex items-start">
+                            <div class="shrink-0">
+                                <i class="bx bx-support text-teal-700 text-3xl"></i>
+                            </div>
+                            <div class="ml-6 grow">
+                                <p class="mb-2 font-bold">
+                                    Technical support
+                                </p>
+                                <p class="text-neutral-500 ">
+                                    support@example.com
+                                </p>
+                                <p class="text-neutral-500 ">
+                                    +1 234-567-89
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
+                        <div class="flex items-start">
+                            <div class="shrink-0">
+                                <i class="bx bx-envelope text-teal-700 text-3xl"></i>
+                            </div>
+                            <div class="ml-6 grow">
+                                <p class="mb-2 font-bold ">
+                                    Sales questions
+                                </p>
+                                <p class="text-neutral-500 ">
+                                    sales@example.com
+                                </p>
+                                <p class="text-neutral-500 ">
+                                    +1 234-567-89
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
+                        <div class="align-start flex">
+                            <div class="shrink-0">
+                                <i class="bx bx-news text-teal-700 text-3xl"></i>
+                            </div>
+                            <div class="ml-6 grow">
+                                <p class="mb-2 font-bold ">Press</p>
+                                <p class="text-neutral-500 ">
+                                    press@example.com
+                                </p>
+                                <p class="text-neutral-500 ">
+                                    +1 234-567-89
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:w-6/12 md:px-3 lg:px-6">
+                        <div class="align-start flex">
+                            <div class="shrink-0">
+                                <i class="bx bx-bug text-teal-700 text-3xl"></i>
+                            </div>
+                            <div class="ml-6 grow">
+                                <p class="mb-2 font-bold">
+                                    Bug report
+                                </p>
+                                <p class="text-neutral-500 ">
+                                    bugs@example.com
+                                </p>
+                                <p class="text-neutral-500">
+                                    +1 234-567-89
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+
+{% endblock  %}
+
+

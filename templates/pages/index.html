@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block title %}index page{% endblock  %}
+
+
+
+
+{% block content %}
+
+
+
+<!-- Carousel Container -->
+<div id="carousel" class="relative -z-10 w-full overflow-hidden">
+  <!-- Slides -->
+  <div class="relative h-[300px] sm:h-[500px]">
+    <div class="carousel h-full flex transition-transform duration-1000">
+      <!-- Slide 1 -->
+      <div class="relative w-full h-full flex-shrink-0">
+        <img
+          src="{%static '/images/banner1.jpg'%}"
+          alt="Slide 1"
+          class="carousel-item w-full h-full object-cover"
+        />
+        <div
+          class="absolute inset-0 flex flex-col sm:pl-32 pl-5 justify-center text-white opacity-0 transition-opacity duration-1000"
+          id="text-0"
+        >
+          <h2 class="text-xl sm:text-5xl font-bold mb-2 animate-slide-up">
+            Your Stories, Your Voice!
+          </h2>
+          <p class="text-sm sm:text-lg animate-slide-up">
+            Nobady Can Suppress You
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="relative w-full h-full flex-shrink-0">
+        <img
+          src="{%static '/images/banner2.jpg'%}"
+          alt="Slide 2"
+          class="carousel-item w-full h-full object-cover"
+        />
+        <div
+          class="absolute inset-0 flex flex-col sm:pl-32 pl-5 justify-center text-orange-500 opacity-0 transition-opacity duration-1000"
+          id="text-1"
+        >
+          <h2 class="text-xl sm:text-5xl font-bold mb-2 animate-slide-up">
+            Turning Moments into Memories!
+          </h2>
+          <p class="text-sm sm:text-lg animate-slide-up">
+            Make Your Moments Unforgettable
+          </p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="relative w-full h-full flex-shrink-0">
+        <img
+          src="{%static '/images/banner3.jpg'%}"
+          alt="Slide 3"
+          class="carousel-item w-full h-full object-cover"
+        />
+        <div
+          class="absolute inset-0 flex flex-col sm:pl-32 pl-5 justify-center text-orange-500 opacity-0 transition-opacity duration-1000"
+          id="text-2"
+        >
+          <h2 class="text-xl sm:text-5xl font-bold mb-2 animate-slide-up">
+            Share Your Journey With Us!
+          </h2>
+          <p class="text-sm sm:text-lg animate-slide-up">
+            Post your travel stories, thoughts, and ideas today!
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dots for navigation -->
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+    <button class="dot w-3 h-3 rounded-full bg-white" data-slide="0"></button>
+    <button class="dot w-3 h-3 rounded-full bg-gray-500" data-slide="1"></button>
+    <button class="dot w-3 h-3 rounded-full bg-gray-500" data-slide="2"></button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+  {% comment %} blog hero section  {% endcomment %}
+
+  <section class="dark:bg-gray-100 dark:text-gray-800">
+    
+   {% if random_blog.slug %}
+	<div class="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
+		<a rel="noopener noreferrer" href="{% url "detail_blog" random_blog.slug %}" class="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 dark:bg-gray-50">
+			<img src="{{random_blog.main_image.url}}" alt="" class="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500">
+			<div class="p-6 space-y-2 lg:col-span-5">
+				<h1 class="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">{{random_blog.title}}</h1>
+				<span class="text-xs dark:text-gray-600">{{random_blog.created_at}}</span>
+				<p>{{random_blog.content|truncatewords:50}}</p>
+			</div>
+		</a>
+    {% else %}
+    <h2 class="text-5xl font-bold text-center my-10">No blog Present</h2>
+    {% endif %}
+
+
+
+    <div class="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for blog in blogs %}
+      <div class="max-w-sm mx-auto rounded-lg border-2 border-orange-500 group hover:no-underline focus:no-underline dark:bg-gray-50 block">
+          <!-- Blog Image -->
+          <img role="presentation" class="object-cover rounded-lg p-2 w-full h-44 dark:bg-gray-500" src="{{blog.main_image.url}}">
+          
+          <!-- Blog Content -->
+          <div class="p-6 space-y-2">
+             <a rel="noopener noreferrer" href='{% url "detail_blog" blog.slug %}'><h2 class="text-2xl font-semibold group-hover:underline group-focus:underline">{{blog.title}}</h2></a> 
+              <span class="text-xs dark:text-gray-600">{{blog.created_at}}</span>
+              <p>{{blog.content|truncatewords:30}}</p>
+          </div>
+  
+        
+        </div>
+      {% endfor %}
+  </div>
+  
+</div>
+	</div>
+</section>
+
+
+
+{% endblock  %}
+
+

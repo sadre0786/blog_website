@@ -1,0 +1,67 @@
+{% extends "layout.html" %} {% block title %}Register page{% endblock %} 
+
+
+{%block content %}
+
+<div
+  class="dark:bg-gray-800 h-screen overflow-hidden mt-10 flex items-center justify-center"
+>
+  <div class="bg-white lg:w-6/12 md:7/12 w-8/12 shadow-3xl rounded-xl">
+    <div
+      class="bg-gray-800 shadow shadow-gray-200 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full p-4 md:p-8"
+    >
+      <i class="bx bxs-envelope text-white text-3xl"></i>
+    </div>
+    <form method="post" novalidate class="p-12 border md:p-24">
+      {% csrf_token %}
+      <div class="mb-6 md:mb-8">
+        <div class="flex items-center text-lg ">
+          <i class="bx bx-envelope absolute ml-3 text-gray-600"></i>
+          {{form.username}}
+        </div>
+        {% for error in form.username.errors %}
+          <p class="text-red-700">{{error}}</p>
+          {% endfor %}
+      </div>
+      
+      <div class="mb-6 md:mb-8">
+      <div class="flex items-center text-lg ">
+        <i class="bx bx-envelope absolute ml-3 text-gray-600"></i>
+        {{form.email}}
+      </div>
+      {% for error in form.email.errors %}
+        <p class="text-red-700">{{error}}</p>
+        {% endfor %}
+    </div>
+      
+    <div class="mb-6 md:mb-8">
+      <div class="flex items-center text-lg ">
+        <i class="bx bx-envelope absolute ml-3 text-gray-600"></i>
+        {{form.password1}}
+      </div>
+      {% for error in form.password1.errors %}
+        <p class="text-red-700">{{error}}</p>
+        {% endfor %}
+    </div>
+
+    <div class="mb-6 md:mb-8">
+      <div class="flex items-center text-lg ">
+        <i class="bx bx-envelope absolute ml-3 text-gray-600"></i>
+        {{form.password2}}
+      </div>
+      {% for error in form.password2.errors %}
+        <p class="text-red-700">{{error}}</p>
+        {% endfor %}
+    </div>
+      
+      <button
+        type="submit"
+        class="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full rounded"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
