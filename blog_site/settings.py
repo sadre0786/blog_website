@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-!p^bj8(q*knew8)h*0j-ld=bc03=7=a*nc28&6@$9o*-h7o)&)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -146,3 +146,9 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+import dj_database_url
+DATABASES = {
+    'default': dj_database_url.config(conn_max_age=600)
+}
